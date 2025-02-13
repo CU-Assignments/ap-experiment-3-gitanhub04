@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+    
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+
+void printList(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    Node* head1 = new Node(1);
+    head1->next = new Node(2);
+    
+    Node* head2 = new Node(49);
+    head2->next = new Node(10);
+    head2->next->next = new Node(30);
+
+    printList(head1);
+    printList(head2);
+
+    return 0;
+}
