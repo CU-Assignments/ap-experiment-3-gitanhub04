@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+//anurag(22BET10069)
 struct Node {
     int data;
     Node* next;
