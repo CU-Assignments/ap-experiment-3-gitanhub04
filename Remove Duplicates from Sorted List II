@@ -1,0 +1,68 @@
+#include <iostream>
+//anurag(22BET10069)
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+
+ListNode* deleteDuplicates(ListNode* head) {
+    ListNode* dummy = new ListNode(0);
+    dummy->next = head;
+    ListNode* prev = dummy;
+
+    while (head) {
+        if (head->next && head->val == head->next->val) {
+            while (head->next && head->val == head->next->val) {
+                head = head->next;
+            }
+            prev->next = head->next; 
+        } else {
+            prev = prev->next;
+        }
+        head = head->next;
+    }
+    return dummy->next;
+}
+
+void printList(ListNode* head) {
+    while (head) {
+        std::cout << head->val << " -> ";
+        head = head->next;
+    }
+    std::cout << "NULL" << std::endl;
+}
+
+ListNode* createList(int arr[], int size) {
+    if (size == 0) return nullptr;
+    ListNode* head = new ListNode(arr[0]);
+    ListNode* current = head;
+    for (int i = 1; i < size; i++) {
+        current->next = new ListNode(arr[i]);
+        current = current->next;
+    }
+    return head;
+}
+
+int main() {
+    int arr1[] = {1, 2, 3, 3, 4, 4, 5};
+    int arr2[] = {1, 1, 1, 2, 3};
+
+    ListNode* head1 = createList(arr1, 7);
+    std::cout << "Original List 1: ";
+    printList(head1);
+    head1 = deleteDuplicates(head1);
+    std::cout << "Modified List 1: ";
+    printList(head1);
+
+    std::cout << std::endl;
+
+    ListNode* head2 = createList(arr2, 5);
+    std::cout << "Original List 2: ";
+    printList(head2);
+    head2 = deleteDuplicates(head2);
+    std::cout << "Modified List 2: ";
+    printList(head2);
+
+    return 0;
+}
